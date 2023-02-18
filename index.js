@@ -159,7 +159,7 @@ function keepalive() {
   https.get("https://" + process.env.RENDER_EXTERNAL_HOSTNAME + "/generate_204", res => {
     if (res.statusCode == 204) {
     } else {
-      console.log("请求错误: " + statusCode)
+      console.log("请求错误: " + res.statusCode)
     }
   }).on('error', err => {
     console.log("请求错误: " + err)
