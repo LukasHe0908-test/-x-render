@@ -4,12 +4,12 @@
 let err404 = `<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Page not found</title><style>*{margin:0;padding:0;font-family:sans-serif}body,html{width:100%;height:100%;overflow:auto;color:#000;background-color:#fff;box-sizing:border-box}.container{margin-left:auto;margin-right:auto;--padding:18px;padding-left:var(--padding);padding-right:var(--padding);width:calc(100% - var(--padding) * 2);margin-top:80px;border-radius:8px;transition:all ease .2s,background-color 0s,color 0s}@media (min-width:980px){.container{max-width:978px}}@media (min-width:1200px){.container{max-width:1128px}}@media (max-height:500px){.container{margin-top:18px}}#backHome{display:inline-flex;align-items:center;color:#fff;background-color:#333;border-radius:16px;margin:16px 0 0;padding:16px 32px;transition:all ease .2s,background-color 0s,color 0s;user-select:none}#backHome:hover{transition:all ease .2s;background-color:#2a2a2a}#backHome:active{transition:all ease .2s;background-color:#2a2a2a;transform:scale(.95)}#backHome svg{fill:#fff}.col-2{color:#222}.headline-1{font-size:3em;font-weight:600;margin-bottom:24px}.headline-5{font-size:1em;font-weight:600;margin-bottom:0}</style></head><body><div class="container"><div><h1 class="headline-1 col-2">Page not found</h1><h5 class="headline-5 col-2">Sorry, we can't find the page you are looking for in this download server.</h5></div><div id="backHome">Back Home</div></div></body><script>document.querySelector('#backHome').addEventListener('click', () => { location.pathname = "/" });</script></html>`;
 
 const express = require("express");
-const fs = require("node:fs");
-const path = require("node:path");
-const cp = require("node:child_process");
-const http = require('node:http');
-const https = require('node:https');
-const stream = require('node:stream');
+const fs = require("fs");
+const path = require("path");
+const cp = require("child_process");
+const http = require('http');
+const https = require('https');
+const stream = require('stream');
 const httpProxyMiddleware = require("http-proxy-middleware");
 var app = express();
 var config = {
@@ -81,7 +81,7 @@ async function start_web(callback) {
     InboundPort: 8080,
     InboundAddress: '127.0.0.1',
     sniffingEnabled: false,
-    InboundProtocol: atob('dmxlc3M='),
+    InboundProtocol: Buffer.from('dmxlc3M=', 'base64').toString(),
     InboundUUID: config.uuid,
     InboundStreamType: 'ws',
     InboundEncryption: 'auto',
